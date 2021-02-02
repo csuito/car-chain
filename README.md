@@ -13,6 +13,6 @@ The system is designed to be implemented together with a smart card inserted in 
 ---
 
 Project contributors:
-[lales12](https://github.com/lales12)
-[Rekard0](https://github.com/Rekard0)
-[csuito](https://github.com/csuito)
+- [lales12](https://github.com/lales12)
+- [Rekard0](https://github.com/Rekard0)
+- [csuito](https://github.com/csuito)
