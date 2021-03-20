@@ -8,21 +8,15 @@ At the core of our system is an Authorizer contract that defines who can execute
 
 The system is designed to be implemented together with a smart card inserted in the vehicle that will sign transactions and identify the vehicle before any event is registered on blockchain.
 
----
-
 ## Running tests
 
 Run a local development blockchain with `truffle develop`.
 
 In a serparate terminal window, run `truffle test`.
 
----
-
 ## Code coverage
 
 Run `npm run coverage` to get code coverage data.
-
----
 
 ## Project contributors
 
