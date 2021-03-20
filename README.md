@@ -24,6 +24,6 @@ Run `npm run coverage` to get code coverage data.
 
 ## Project contributors
 
-[lales12](https://github.com/lales12)
-[Rekard0](https://github.com/Rekard0)
-[csuito](https://github.com/csuito)
+- [lales12](https://github.com/lales12)
+- [Rekard0](https://github.com/Rekard0)
+- [csuito](https://github.com/csuito)
