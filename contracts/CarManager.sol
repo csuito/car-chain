@@ -1,20 +1,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.5.16;
 
-import {ECDSA} from './libraries/ECDSA.sol';
+import {ECDSA} from "./libraries/ECDSA.sol";
 
-import './interfaces/CarInterface.sol';
-import './Authorizer.sol';
-import './BaseManager.sol';
+import "./interfaces/CarInterface.sol";
+import "./Authorizer.sol";
+import "./BaseManager.sol";
 
 contract CarManager is BaseManager {
     using ECDSA for bytes32;
 
-    string public constant CREATE_CAR_METHOD = 'create(bytes32,bytes,uint256)';
-    string public constant DELIVER_CAR_METHOD = 'deliverCar(address)';
-    string public constant SELL_CAR_METHOD = 'sellCar(address)';
-    string public constant REGISTER_CAR_METHOD = 'registerCar()';
-    string public constant UPDATE_CAR_METHOD = 'updateCarState(bytes,uint256)';
+    string public constant CREATE_CAR_METHOD = "create(bytes32,bytes,uint256)";
+    string public constant DELIVER_CAR_METHOD = "deliverCar(address)";
+    string public constant SELL_CAR_METHOD = "sellCar(address)";
+    string public constant REGISTER_CAR_METHOD = "registerCar()";
+    string public constant UPDATE_CAR_METHOD = "updateCarState(bytes,uint256)";
 
     enum CarState {SHIPPED, FOR_SALE, SOLD, REGISTERED}
 
@@ -55,7 +55,7 @@ contract CarManager is BaseManager {
         carToken.mint(msg.sender, carIdHash, carAddress);
 
         trackedCars[carAddress] = Car({
-            licensePlate: '',
+            licensePlate: "",
             carType: CarType(carTypeIndex),
             carState: CarState.SHIPPED
         });
@@ -69,7 +69,7 @@ contract CarManager is BaseManager {
     {
         require(
             CarState.SHIPPED == trackedCars[carAddress].carState,
-            'This car is not shipped'
+            "This car is not shipped"
         );
 
         _updateCarState(carAddress, uint256(CarState.FOR_SALE));
@@ -82,22 +82,10 @@ contract CarManager is BaseManager {
     {
         require(
             CarState.FOR_SALE == trackedCars[carAddress].carState,
-            'This car is not for sale'
+            "This car is not for sale"
         );
 
         _updateCarState(carAddress, uint256(CarState.SOLD));
-        // This is an attemp to do in the same call the token transfer and update the status
-        // (bool success, bytes memory result) = carTokenAddress.delegatecall(
-        //     abi.encodeWithSignature(
-        //         'transferFrom(address,address,uint256)',
-        //         msg.sender,
-        //         to,
-        //         carAddress
-        //     )
-        // );
-        // require(success, "Error transfering token");
-        // carToken.transferFrom(msg.sender, to, carId);
-        // END_COMMENT
     }
 
     function registerCar(address carAddress, string memory licensePlate)
@@ -107,7 +95,7 @@ contract CarManager is BaseManager {
     {
         require(
             CarState.SOLD == trackedCars[carAddress].carState,
-            'This car is not sold'
+            "This car is not sold"
         );
 
         trackedCars[carAddress].licensePlate = licensePlate;

@@ -10,7 +10,7 @@ contract CarAsset is ERC721 {
     mapping( uint256 => address) carMappingTokenAddress;
     mapping( address => bool) authorizedManagers;
 
-    constructor () public ERC721('CarAsset', 'car') {
+    constructor () public ERC721("CarAsset", "car") {
         _owner = msg.sender;
     }
     

@@ -20,7 +20,7 @@ contract Authorizer {
     );
 
     modifier onlyOwner() {
-        require(msg.sender == owner, 'Only owner can manage permissions');
+        require(msg.sender == owner, "Only owner can manage permissions");
         _;
     }
 
@@ -46,7 +46,7 @@ contract Authorizer {
         bytes32 methodHash = keccak256(abi.encodePacked(_method));
         require(
             permissions[_contract][methodHash][_to] == true,
-            'Permision do not exist'
+            "Permission does not exist"
         );
         permissions[_contract][methodHash][_to] = false;
         emit PermissionRemoved(_contract, _to, _method);

@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.5.16;
 
-import './interfaces/CarInterface.sol';
-import './BaseManager.sol';
+import "./interfaces/CarInterface.sol";
+import "./BaseManager.sol";
 
 contract ITVManager is BaseManager {
-    string constant UPDATE_METHOD = 'updateITV(uint256,uint256)';
+    string constant UPDATE_METHOD = "updateITV(uint256,uint256)";
 
     enum ITVState {PASSED, NOT_PASSED, NEGATIVE}
 
