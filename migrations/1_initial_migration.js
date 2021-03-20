@@ -1,3 +1,3 @@
 module.exports = (deployer) => {
-    deployer.deploy(artifacts.require('Migrations'))
-}
+  deployer.deploy(artifacts.require("Migrations"));
+};
