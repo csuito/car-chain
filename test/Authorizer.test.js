@@ -6,7 +6,8 @@ contract("Authorizer", async (accounts) => {
 
   // add/remove permissions test variables
   const _contract = accounts[2];
-  const _method = "addBrandaddress";
+  const _method = "addBrandAddress";
+  const methodHex = web3.utils.fromAscii(_method);
   const _to = accounts[3];
 
   const errors = {
@@ -35,7 +36,7 @@ contract("Authorizer", async (accounts) => {
 
   it("fails to add permission as non-owner account", async () => {
     try {
-      await contract.addPermission(_contract, _method, _to, { from: hacker });
+      await contract.addPermission(_contract, methodHex, _to, { from: hacker });
       assert.fail("error: added permission as non-owner");
     } catch (e) {
       assert.equal(e.reason, errors.ONLY_OWNER, "error: unexpected error when adding permission as non-owner");
@@ -43,37 +44,24 @@ contract("Authorizer", async (accounts) => {
   });
 
   it("allows owner to add a permission", async () => {
-    try {
-      await contract.addPermission(_contract, _method, _to, { from: owner });
-      const methodHash = await web3.utils.soliditySha3(_method);
-
-      const permission = await contract.permissions(_contract, methodHash, _to);
-      assert.isOk(permission, "error: failed to add permission as owner");
-    } catch (e) {
-      assert.fail("error: failed to add permission as owner");
-    }
-  });
-
-  it("emits a 'PermissionAdded' event correctly", async () => {
     const {
       receipt: {
         logs: [eventObj],
       },
-    } = await contract.addPermission(_contract, _method, _to, { from: owner });
+    } = await contract.addPermission(_contract, methodHex, _to, { from: owner });
     const {
       event: eventName,
-      args: { _contract: contractResult, _method: methodResult, _to: toResult },
+      args: { _contract: contractResult, _to: toResult },
     } = eventObj;
 
     assert.equal(eventName, events.PERMISSION_ADDED, "error: wrong event name");
     assert.equal(_contract, contractResult, "error: wrong event contract");
-    assert.equal(_method, methodResult, "error: wrong event method");
     assert.equal(_to, toResult, "error: wrong event 'to' address");
   });
 
   it("fails to remove permission as non-owner account", async () => {
     try {
-      await contract.removePermission(_contract, _method, _to, { from: hacker });
+      await contract.removePermission(_contract, methodHex, _to, { from: hacker });
       assert.fail("error: removed permission as non-owner");
     } catch (e) {
       assert.equal(e.reason, errors.ONLY_OWNER, "error: unexpected error when removing permission as non-owner");
@@ -81,40 +69,27 @@ contract("Authorizer", async (accounts) => {
   });
 
   it("allows owner to remove a permission", async () => {
-    try {
-      await contract.addPermission(_contract, _method, _to, { from: owner });
-
-      await contract.removePermission(_contract, _method, _to, { from: owner });
-
-      const permission = await contract.requestAccess(_contract, _method, _to);
-      assert.isNotOk(permission, "error: failed to remove permission as owner");
-    } catch (e) {
-      assert.fail("error: failed to remove permission as owner");
-    }
-  });
-
-  it("emits a 'PermissionRemoved' event correctly", async () => {
-    await contract.addPermission(_contract, _method, _to, { from: owner });
+    await contract.addPermission(_contract, methodHex, _to, { from: owner });
 
     const {
       receipt: {
         logs: [eventObj],
       },
-    } = await contract.removePermission(_contract, _method, _to, { from: owner });
+    } = await contract.removePermission(_contract, methodHex, _to, { from: owner });
     const {
       event: eventName,
-      args: { _contract: contractResult, _method: methodResult, _to: toResult },
+      args: { _contract: contractResult, _to: toResult },
     } = eventObj;
 
     assert.equal(eventName, events.PERMISSION_REMOVED, "error: wrong event name");
     assert.equal(_contract, contractResult, "error: wrong event contract");
-    assert.equal(_method, methodResult, "error: wrong event method");
     assert.equal(_to, toResult, "error: wrong event 'to' address");
   });
 
   it("retrieves permissions correctly", async () => {
-    await contract.addPermission(_contract, _method, _to, { from: owner });
-    const access = await contract.requestAccess(_contract, _method, _to);
-    assert.isOk(access, "error: failed to retrieve permissions");
+    await contract.addPermission(_contract, methodHex, _to, { from: owner });
+    const isAuthorized = await contract.requestAccess(_contract, methodHex, _to);
+
+    assert.isTrue(isAuthorized, "error: failed to retrieve permissions");
   });
 });

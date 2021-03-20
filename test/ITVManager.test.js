@@ -13,7 +13,7 @@ contract("ITVManager", (accounts) => {
   const itvAuthorized = accounts[1];
 
   const carId = 12342314123454;
-  const updateITVMethod = "updateITV(uint256,uint256)";
+  const updateITVMethod = web3.utils.fromAscii("updateITV(uint256,uint256)");
 
   const ITV_PASSED = 0;
 

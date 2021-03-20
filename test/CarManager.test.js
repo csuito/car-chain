@@ -31,12 +31,6 @@ contract("CarManager", (accounts) => {
     AGRICULTURE: 5,
   };
 
-  const itvStates = {
-    PASSED: 0,
-    NOT_PASSED: 1,
-    NEGATIVE: 2,
-  };
-
   let carManagerContract;
   let carAssetContract;
   let authorizerContract;

@@ -1,0 +1,16 @@
+{
+  "extends": "solhint:recommended",
+  "plugins": [],
+  "rules": {
+    "avoid-throw": false,
+    "avoid-suicide": "error",
+    "avoid-sha3": "warn",
+    "func-order": "warn",
+    "func-param-name-mixedcase": "warn",
+    "func-visibility": ["warn", { "ignoreConstructors" : false }],
+    "modifier-name-mixedcase": "warn",
+    "ordering": "warn",
+    "reason-string": ["warn", { "maxLength": 60 }],
+    "quotes": ["warn", "double"]
+  }
+}

@@ -10,11 +10,11 @@ import "./BaseManager.sol";
 contract CarManager is BaseManager {
     using ECDSA for bytes32;
 
-    string public constant CREATE_CAR_METHOD = "create(bytes32,bytes,uint256)";
-    string public constant DELIVER_CAR_METHOD = "deliverCar(address)";
-    string public constant SELL_CAR_METHOD = "sellCar(address)";
-    string public constant REGISTER_CAR_METHOD = "registerCar()";
-    string public constant UPDATE_CAR_METHOD = "updateCarState(bytes,uint256)";
+    bytes32 public constant CREATE_CAR_METHOD = "create(bytes32,bytes,uint256)";
+    bytes32 public constant DELIVER_CAR_METHOD = "deliverCar(address)";
+    bytes32 public constant SELL_CAR_METHOD = "sellCar(address)";
+    bytes32 public constant REGISTER_CAR_METHOD = "registerCar()";
+    bytes32 public constant UPDATE_CAR_METHOD = "updateCarState(bytes,uint256)";
 
     enum CarState {SHIPPED, FOR_SALE, SOLD, REGISTERED}
 
@@ -33,8 +33,8 @@ contract CarManager is BaseManager {
         CarState carState;
     }
 
-    mapping(address => Car) trackedCars;
-    uint256[] registeredCars;
+    mapping(address => Car) public trackedCars;
+    uint256[] public registeredCars;
 
     event CarAdded(address indexed carAddress); // probably we need carOwner's address in the event
     event ITVInspection(uint256 indexed carID);

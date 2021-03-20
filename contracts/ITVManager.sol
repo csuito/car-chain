@@ -5,8 +5,6 @@ import "./interfaces/CarInterface.sol";
 import "./BaseManager.sol";
 
 contract ITVManager is BaseManager {
-    string constant UPDATE_METHOD = "updateITV(uint256,uint256)";
-
     enum ITVState {PASSED, NOT_PASSED, NEGATIVE}
 
     struct ITVInspection {
@@ -14,7 +12,9 @@ contract ITVManager is BaseManager {
         uint256 date;
     }
 
-    mapping(uint256 => ITVInspection[]) ITVs;
+    bytes32 public constant UPDATE_METHOD = "updateITV(uint256,uint256)";
+
+    mapping(uint256 => ITVInspection[]) public ITVs;
 
     event ITVInspectionEvent(uint256 carID, ITVState state);
 

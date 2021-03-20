@@ -12,7 +12,7 @@ contract BaseManager {
     address public owner;
 
     modifier onlyAuthorized(
-        string memory _method,
+        bytes32 _method,
         address _account
     ) {
         bool hasAccess = auth.requestAccess(address(this), _method, _account);

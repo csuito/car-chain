@@ -4,11 +4,11 @@ pragma solidity ^0.6.2;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract CarAsset is ERC721 {
-    address _owner;
+    address public _owner;
 
-    mapping( address => uint256) carMappingAddressToken;
-    mapping( uint256 => address) carMappingTokenAddress;
-    mapping( address => bool) authorizedManagers;
+    mapping(address => uint256) public carMappingAddressToken;
+    mapping(uint256 => address) public carMappingTokenAddress;
+    mapping(address => bool) public authorizedManagers;
 
     constructor () public ERC721("CarAsset", "car") {
         _owner = msg.sender;

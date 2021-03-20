@@ -10,13 +10,13 @@ contract Authorizer {
     event PermissionAdded(
         address indexed _contract,
         address indexed _to,
-        string _method
+        bytes32 _method
     );
 
     event PermissionRemoved(
         address indexed _contract,
         address indexed _to,
-        string _method
+        bytes32 _method
     );
 
     modifier onlyOwner() {
@@ -30,7 +30,7 @@ contract Authorizer {
 
     function addPermission(
         address _contract,
-        string memory _method,
+        bytes32 _method,
         address _to
     ) public onlyOwner {
         bytes32 methodHash = keccak256(abi.encodePacked(_method));
@@ -40,7 +40,7 @@ contract Authorizer {
 
     function removePermission(
         address _contract,
-        string memory _method,
+        bytes32 _method,
         address _to
     ) public onlyOwner {
         bytes32 methodHash = keccak256(abi.encodePacked(_method));
@@ -54,7 +54,7 @@ contract Authorizer {
 
     function requestAccess(
         address _contract,
-        string memory _method,
+        bytes32 _method,
         address _to
     ) public view returns (bool) {
         bytes32 methodHash = keccak256(abi.encodePacked(_method));
