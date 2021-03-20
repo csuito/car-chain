@@ -1,6 +1,4 @@
-# Tracking assets on chain
-
----
+# Car chain
 
 This repo contains smart contract code for the final project at UPC Barcelona.
 
@@ -18,9 +16,13 @@ Run a local development blockchain with `truffle develop`.
 
 In a serparate terminal window, run `truffle test`.
 
+---
+
 ## Code coverage
 
 Run `npm run coverage` to get code coverage data.
+
+---
 
 ## Project contributors
 
