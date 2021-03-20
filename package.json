@@ -1,12 +1,17 @@
 {
   "scripts": {
+    "prepare": "husky install",
     "test": "truffle test",
+    "test:migrate": "truffle compile --quiet && truffle migrate --dry-run --describe-json",
+    "test:authorizer": "truffle test ./test/Authorizer.test.js",
+    "test:base-manager": "truffle test ./test/BaseManager.test.js",
+    "test:car-manager": "truffle test ./test/CarManager.test.js",
+    "test:itv-manager": "truffle test ./test/ITVManager.test.js",
+    "coverage": "truffle run coverage",
     "solhint": "./node_modules/.bin/solhint -f table contracts/**/*.sol",
     "prettier:solidity": "./node_modules/.bin/prettier --write contracts/**/*.sol",
     "prettier:js": "./node_modules/.bin/prettier --write \"./**/*.js\"",
-    "format": "npm run prettier:solidity && npm run prettier:js",
-    "prepare": "husky install",
-    "test:migrate": "truffle compile --quiet && truffle migrate --dry-run --describe-json"
+    "format": "npm run prettier:solidity && npm run prettier:js"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.2.0",

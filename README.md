@@ -18,6 +18,10 @@ Run a local development blockchain with `truffle develop`.
 
 In a serparate terminal window, run `truffle test`.
 
+## Code coverage
+
+Run `npm run coverage` to get code coverage data.
+
 ## Project contributors
 
 [lales12](https://github.com/lales12)
